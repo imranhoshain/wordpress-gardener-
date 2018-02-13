@@ -222,13 +222,17 @@ a.banner-btn:hover{
 
 /* Start breadcrumb area css*/
 #breadcrumb-area {
-  background: rgba(0, 0, 0, 0) url("../img/slider/breadcrumb-bg.jpg") no-repeat scroll center center / cover ;
+  background: rgba(0, 0, 0, 0) url("../../img/slider/breadcrumb-bg.jpg") no-repeat scroll center center / cover ;
   padding-bottom: 52px;
   padding-top: 67px;
   transition: .5s all;
 }
 #breadcrumb-area:hover{
 	opacity: .8;
+}
+
+.breadcrumb{
+    background: transparent;
 }
 .breadcrumb-title h1 {
   color: #ffffff;

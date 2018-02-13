@@ -1,20 +1,20 @@
 <?php get_header(); ?>
 
-<section id="services" class="service-item">
+<div id="gardener-blogs-content">
 	<div class="container">
+	<div class="row">
 <?php 
 while ( have_posts() ) : the_post();
+        
+        
 
 get_template_part('template-parts/page/content','page');
-
-	if ( comments_open() || get_comments_number() ) :
-					comments_template();
-	endif;
-
+	
 endwhile;
 ?>
+    </div>
 </div>
-</section>
+</div>
 
 
 <?php get_footer();

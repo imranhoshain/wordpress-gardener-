@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
-    <title><?php wp_title(''); ?> </title>
+   <title><?php bloginfo( 'name' ); echo ' | '; wp_title(''); ?></title> <!-- Change title name -->
 
     <?php wp_head(); ?>
 </head>
@@ -48,7 +48,7 @@
         <div class="container">
             <div class="logo pull-left">
                 <a href="index.html">
-					<img src="img/logo.png" alt="Awesome Image"/>
+					<?php the_custom_logo(); ?>
 				</a>
             </div>
             <div class="top-info pull-right">
@@ -56,11 +56,8 @@
                     <div class="text-box">
                         <p><span class="highlighted">Follow Us:</span></p>
                         <ul class="social-icons">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                            <?php if ( get_theme_mod( 'facebook' ) ){ echo '<li><a href="' .esc_url( get_theme_mod( 'facebook' ) ). '"><i class="fa fa-facebook hvr-wobble-top txcolor" aria-hidden="true"></i></a></li>'; } ?>
+
                         </ul>
                     </div>
                 </div>

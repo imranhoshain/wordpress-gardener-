@@ -13,9 +13,30 @@
 		-->
 		<div class="tp-banner-container">
 			<div class="tp-banner" >
-				<ul>	<!-- SLIDE  -->
-					<?php putRevSlider('garden', 'homepage'); ?>
+				<ul>	<!-- SLIDE  -->				
+				<?php
+                    //Setup your slider
+                   /* global $post;
+                    $args = array( 'posts_per_page' => 3, 'post_type'=> 'slide' );
+                    $myposts = get_posts( $args );
+                    foreach( $myposts as $post ) : setup_postdata($post); */
+                ?>
+
+                    <?php
+                        //Slider call variable
+                       /* $slider_bg = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'slider-bg' );
+                        $slider_thumb = get_post_meta($post->ID, 'slider-thumb', true);
+                        $slider_link = get_post_meta($post->ID, 'slider-link', true);*/
+                    ?>				
+				<div class="tp-banner revslider-initialised tp-simpleresponsive" id="revslider-467">
+					<li data-transition="fade" data-slotamount="7" data-masterspeed="1500" >
+						<!-- MAIN IMAGE -->
+						<?php putRevSlider('garden', 'homepage'); ?>
+						
+                    </li>					
+					<?php //endforeach; ?>
 					
+					</div>
 				</ul>
 				<div class="tp-bannertimer"></div>
 			</div>
@@ -31,105 +52,42 @@
 			<div class="section-title2">
 				<h1>our awesome <span>services</span></h1>
 			</div>
-			<div class="row wow fadeInUp">
-            	<!--Start single service icon-->
-				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                	<div class="single-service-item">
-                    	 
-                        <div class="service-icon">
-                        	<img src="img/service-icons/006-watering-can.png" alt="" />
-                        </div>
-                        <div class="service-text">
-                        	<h4>Watering garden</h4>
-                            <p>Duis aute irure dolor in reprehend erit in voluptate velit esse.</p>
-                        </div>
-                    </div>
-                </div>
-                <!--End single service icon-->
+			<div class="row wow fadeInUp">            	
+              
                 <!--Start single service icon-->
+                <?php
+
+                    $service_sections = cs_get_option('service_1');
+                    if(is_array($service_sections)){
+                    foreach($service_sections as $service_section){ 
+                ?>
 				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 	<div class="single-service-item">
                     	 
                         <div class="service-icon">
-                        	<img src="img/service-icons/005-pruners.png" alt="" />
+                        	<img src="<?php echo esc_url ( wp_get_attachment_image_src ( $service_section['service_image'], 'full' )[0]);?>" alt="" />
                         </div>
                         <div class="service-text">
-                        	<h4>Tree cleaning </h4>
-                            <p>Duis aute irure dolor in reprehend erit in voluptate velit esse.</p>
+                        	<h4><?php echo esc_html ($service_section['service_title'])?></h4>
+                            <p><?php echo esc_html ($service_section['service_description'])?></p>
                         </div>
                     </div>
                 </div>
-                <!--End single service icon-->
-            	<!--Start single service icon-->
-				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                	<div class="single-service-item">
-                    	 
-                        <div class="service-icon">
-                        	<img src="img/service-icons/004-trash-can.png" alt="" />
-                        </div>
-                        <div class="service-text">
-                        	<h4>Rubbish Removal</h4>
-                            <p>Duis aute irure dolor in reprehend erit in voluptate velit esse.</p>
-                        </div>
-                    </div>
-                </div>
-                <!--End single service icon-->
-                <!--Start single service icon-->
-				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                	<div class="single-service-item">
-                    	 
-                        <div class="service-icon">
-                        	<img src="img/service-icons/001-idea.png" alt="" />
-                        </div>
-                        <div class="service-text">
-                        	<h4>Planting Tree</h4>
-                            <p>Duis aute irure dolor in reprehend erit in voluptate velit esse.</p>
-                        </div>
-                    </div>
-                </div>
-                <!--End single service icon-->
-                <!--Start single service icon-->
-				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                	<div class="single-service-item single-service-item2">
-                    	 
-                        <div class="service-icon">
-                        	<img src="img/service-icons/002-seo-expert.png" alt="" />
-                        </div>
-                        <div class="service-text">
-                        	<h4>Certified Expert</h4>
-                            <p>Duis aute irure dolor in reprehend erit in voluptate velit esse.</p>
-                        </div>
-                    </div>
-                </div>
-                <!--End single service icon-->
-                <!--Start single service icon-->
-				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                	<div class="single-service-item">
-                    	 
-                        <div class="service-icon">
-                        	<img src="img/service-icons/003-hand-holding-up-a-sprout.png" alt="" />
-                        </div>
-                        <div class="service-text">
-                        	<h4>Designing & planting</h4>
-                            <p>Duis aute irure dolor in reprehend erit in voluptate velit esse.</p>
-                        </div>
-                    </div>
-                </div>
+                <?php }} ?>
                 <!--End single service icon-->
 			</div>
 		</div>
 	</section>
 
 	<!-- about us section -->
-	<section id="our-history" class="section-bg history-section-bg"> 
+	<section id="our-history" class="section-bg" style="background: url(<?php echo wp_get_attachment_image_src(cs_get_option('history_image'),'full')[0]; ?>) no-repeat scroll center center / cover;"> 
 		<div class="container">
 			<div class="section-title2">
-				<h1>our <span class="white">history</span></h1>
+				<h1><?php echo cs_get_option('history_title') ?></h1>
 			</div>
 			<div class="row  wow fadeInLeft" data-wow-duration=".5s" data-wow-delay=".5s">
 				<div class="col-lg-6 col-md-6 our-history-text"> 
-					<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia con sequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quis quam est, </p> 
-					<p> qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. Neque porro quis quam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
+					<p><?php echo cs_get_option('history_description') ?></p>
 					<a href="#" class="section-btn">More About Us </a>
 				</div>
 			</div>
@@ -157,7 +115,7 @@
 			</div>
 						<div class="mix-it-up-content wow bounceIn"> 
 							<div class="col-md-4 col-sm-4 col-xs-4 pull-left mix planting water">
-								<img src="img/project/6.jpg" alt="" />
+								<img src="<?php echo get_template_directory_uri(); ?>/assets/img/project/6.jpg" alt="" />
 								<div class="mix-overlay"> 
 									<div class="overlay-text"> 
 										<h4>title product</h4>
@@ -166,7 +124,7 @@
 								</div>
 							</div>
 							<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pull-right mix garden water rubbish">
-								<img src="img/project/9.jpg" alt="" />
+								<img src="<?php echo get_template_directory_uri(); ?>/assets/img/project/9.jpg" alt="" />
 								<div class="mix-overlay"> 
 									<div class="overlay-text"> 
 										<h4>title product</h4>
@@ -175,7 +133,7 @@
 								</div>
 							</div>
 							<div class="col-md-4 col-sm-4 col-xs-4 mix garden planting lawn water rubbish">
-								<img src="img/project/3.jpg" alt="" />
+								<img src="<?php echo get_template_directory_uri(); ?>/assets/img/project/3.jpg" alt="" />
 								<div class="mix-overlay"> 
 									<div class="overlay-text"> 
 										<h4>title product</h4>
@@ -184,7 +142,7 @@
 								</div>
 							</div>
 							<div class="col-md-4 col-sm-4 col-xs-4 mix garden garden lawn rubbish">
-								<img src="img/project/2.jpg" alt="" />
+								<img src="<?php echo get_template_directory_uri(); ?>/assets/img/project/2.jpg" alt="" />
 								<div class="mix-overlay"> 
 									<div class="overlay-text"> 
 										<h4>title product</h4>
@@ -193,7 +151,7 @@
 								</div>
 							</div>
 							<div class="col-md-4 col-sm-4 col-xs-4 mix lawn rubbish">
-								<img src="img/project/1.jpg" alt="" />
+								<img src="<?php echo get_template_directory_uri(); ?>/assets/img/project/1.jpg" alt="" />
 								<div class="mix-overlay"> 
 									<div class="overlay-text"> 
 										<h4>title product</h4>
